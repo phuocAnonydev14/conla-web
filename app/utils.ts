@@ -5,4 +5,4 @@ export const social = new AppSocial(
   "https://conla-web.vercel.app"
 );
 
-//https://social-client-demo.vercel.app
+//https://conla-web.vercel.app

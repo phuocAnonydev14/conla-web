@@ -19,7 +19,7 @@ import { extId } from "@/lib/config";
 interface DataSendExt {
   idToken: string;
   accessToken: string;
-  user: {
+  user?: {
     id: any;
     email: any;
     encryptionKey: any;
@@ -60,7 +60,6 @@ export default function OauthPage() {
     } catch (e: any) {
       console.log(e);
       toast(e?.message || "Server error", {
-        description: "Sunday, December 03, 2023 at 9:00 AM",
         action: {
           label: "Undo",
           onClick: () => console.log("Undo"),
