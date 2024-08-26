@@ -73,17 +73,6 @@ export default function OauthPage() {
       // const privateKey = (await social.user?.getPrivateKey()) as string;
       // setUser(userRes);
 
-      console.log("userRes", userRes);
-      if (
-        !userRes?.user.encryptedKey ||
-        userRes?.user.encryptedKey.length <= 0
-      ) {
-        const privateKey = await social.user?.generatePrivateKey(
-          userRes?.idToken
-        );
-        console.log("privateKey", privateKey);
-      }
-
       // handleSendToExt({
       //   ...userRes,
       // } as DataSendExt);
