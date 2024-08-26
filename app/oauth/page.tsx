@@ -15,17 +15,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { extId } from "@/lib/config";
+import { UserSocialType } from "aa-conla-social-sdk/dist/src/types/social.type";
 
 interface DataSendExt {
   idToken: string;
   accessToken: string;
-  user?: {
-    id: any;
-    email: any;
-    encryptionKey: any;
-    created_at: any;
-    updatedAt: any;
-  };
+  user?: UserSocialType;
 }
 
 export default function OauthPage() {
@@ -39,7 +34,6 @@ export default function OauthPage() {
   const handleSendToExt = async (params: DataSendExt) => {
     try {
       console.log("start cakking");
-
       chrome.runtime.sendMessage(extId, params, (response) => {
         console.log(response);
       });
@@ -72,7 +66,6 @@ export default function OauthPage() {
 
   const handleFetchUser = async (codeParams: string) => {
     try {
-      console.log("come here");
       const userRes = await social.user?.getInformation(codeParams);
       // if (!userRes?.user.encryptionKey) {
       //   setIsShowModal(true);
@@ -80,15 +73,26 @@ export default function OauthPage() {
       // const privateKey = (await social.user?.getPrivateKey()) as string;
       // setUser(userRes);
 
-      handleSendToExt({
-        ...userRes,
-      } as DataSendExt);
+      console.log("userRes", userRes);
+      if (
+        !userRes?.user.encryptedKey ||
+        userRes?.user.encryptedKey.length <= 0
+      ) {
+        const privateKey = await social.user?.generatePrivateKey(
+          userRes?.idToken
+        );
+        console.log("privateKey", privateKey);
+      }
+
+      // handleSendToExt({
+      //   ...userRes,
+      // } as DataSendExt);
 
       // handle close when done
-      await social.auth.logout();
-      window.opener = null;
-      window.open("", "_self");
-      window.close();
+      // await social.auth.logout();
+      // window.opener = null;
+      // window.open("", "_self");
+      // window.close();
     } catch (e) {
       console.log(e);
     }

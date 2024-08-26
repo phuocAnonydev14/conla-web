@@ -14,7 +14,7 @@
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "aa-conla-social-sdk": "^0.2.33",
+    "aa-conla-social-sdk": "^0.2.35",
     "aws-amplify": "^6.4.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

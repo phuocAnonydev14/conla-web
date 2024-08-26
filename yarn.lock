@@ -2797,10 +2797,10 @@
     "@uniswap/v3-core" "^1.0.0"
     base64-sol "1.0.1"
 
-aa-conla-social-sdk@^0.2.33:
-  version "0.2.33"
-  resolved "https://registry.yarnpkg.com/aa-conla-social-sdk/-/aa-conla-social-sdk-0.2.33.tgz#13b4f69bb4cd62ca3e77511e1bae03b0b49933a4"
-  integrity sha512-FvWX7LaKjUWuJV+JTpBN9fffnTnpc/rmUYpIuN6/9FBpQxh2EBNRTqF0GXfHKm8JwgTVyd+ES+N4weCyalfNDQ==
+aa-conla-social-sdk@^0.2.35:
+  version "0.2.35"
+  resolved "https://registry.yarnpkg.com/aa-conla-social-sdk/-/aa-conla-social-sdk-0.2.35.tgz#8fb1365164211e3b0b429e98be3966f4294fbae0"
+  integrity sha512-IwyDUzik1IBgW3k9I2IrGXKD7Hh23+/pxe9X+w5MzbGK+2addBkjS8AUdKiq5dQJvfdFAk747+Q8OxQ42ClApw==
   dependencies:
     "@aws-amplify/auth" "^6.3.8"
     "@aws-sdk/client-kms" "^3.614.0"
