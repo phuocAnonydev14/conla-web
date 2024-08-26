@@ -37,6 +37,7 @@ export default function OauthPage() {
       chrome.runtime.sendMessage(extId, params, (response) => {
         console.log(response);
       });
+      console.log("call ext success")
     } catch (e) {
       console.log(e);
     }
@@ -47,7 +48,7 @@ export default function OauthPage() {
       const privateKey = await social.user?.generatePrivateKey();
       setIsShowModal(false);
       setGenerating(true);
-      handleSendToExt({
+      await handleSendToExt({
         ...user,
         privateKey,
       } as DataSendExt);
@@ -67,21 +68,17 @@ export default function OauthPage() {
   const handleFetchUser = async (codeParams: string) => {
     try {
       const userRes = await social.user?.getInformation(codeParams);
-      // if (!userRes?.user.encryptionKey) {
-      //   setIsShowModal(true);
-      // }
-      // const privateKey = (await social.user?.getPrivateKey()) as string;
-      // setUser(userRes);
+      setUser(userRes);
 
-      // handleSendToExt({
-      //   ...userRes,
-      // } as DataSendExt);
+      await handleSendToExt({
+        ...userRes,
+      } as DataSendExt);
 
       // handle close when done
-      // await social.auth.logout();
-      // window.opener = null;
-      // window.open("", "_self");
-      // window.close();
+      await social.auth.logout();
+      window.opener = null;
+      window.open("", "_self");
+      window.close();
     } catch (e) {
       console.log(e);
     }
@@ -103,29 +100,6 @@ export default function OauthPage() {
 
   return (
     <div>
-      <Dialog open={isShowModal} onOpenChange={setIsShowModal}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="text-center">
-              Your account didn&apos;t have private key
-            </DialogTitle>
-            <DialogDescription>
-              <div className="flex flex-col justify-center items-center gap-4">
-                Generate private key
-                <Button
-                  disabled={generating}
-                  onClick={handleGeneratePrivateKey}
-                >
-                  {generating && (
-                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Generate
-                </Button>
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
